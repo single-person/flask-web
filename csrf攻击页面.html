@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<a href="http://localhost:2000/topic/delete?id=2">-->
+    <!--点击领取金币-->
+<!--</a>-->
+<!--<img src="http://localhost:2000/topic/delete?id=3">-->
+<form id="form" method="post" action="http://localhost:3000/topic/add">
+    <input name='title' value="333333333333">
+    <input name="board_id" value="2">
+    <input name='content' value='1111111111111'>
+    <input id="add" type="submit" value="提交">
+</form>
+<script>
+    var e = function(sel) {
+        return document.querySelector(sel)
+    }
+
+    e('#add').click()
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+server {
+    listen 80;
+
+    location /uploads {
+        alias /root/web21/user_image;
+    }
+    location /static {
+        alias /root/web21/static;
+    }
+
+    location / {
+        proxy_pass http://localhost:2000;
+    }
+}

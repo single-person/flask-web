@@ -1,0 +1,25 @@
+{% extends "topic/base.html" %}
+{% block title %}
+设置
+{% endblock %}
+{% block main %}
+    <h1>用户资料页面</h1>
+    <div>
+        user id: {{ user.id }}
+    </div>
+    <div>
+        username: {{ user.username }}
+    </div>
+    <div>
+        user password: {{ user.password }}
+    </div>
+    <h1>Upload new File</h1>
+    <form method=post
+          action='{{ url_for(".add_img") }}'
+          enctype=multipart/form-data>
+        <input type=file name=avatar>
+        <!--<input type=submit value=Upload>-->
+        <button type="submit">Upload</button>
+    </form>
+    <img src="{{ user.user_image }}" title="avatar"/>
+{% endblock %}

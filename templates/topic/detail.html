@@ -1,0 +1,91 @@
+{% extends "topic/base.html" %}
+{% block title %}
+帖子详情 {{ topic.title }}
+{% endblock %}
+{% block main %}
+<div id="main">
+    <div id="content">
+        <div class='panel'>
+            <div class='header topic_header'>
+        <span class="topic_full_title">
+			{{ topic.title }}
+      	</span>
+                <div class="changes">
+            <span>
+                发布于 2 天前
+            </span>
+                    <span>
+                作者
+                <a href="/user/{{user.id}}">{{user.username}}</a>
+        	</span>
+                    <span>
+          	    {{ topic.views }} 次浏览
+        	</span>
+                    <span>
+                来自 问答
+            </span>
+                </div>
+            </div>
+
+            <div class='inner topic'>
+                <div class='topic_content'>
+                    <div class="markdown-text">
+                        {{ topic.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='panel'>
+        <div class='header'>
+            <span class='col_fade'>
+                <!-- 过滤器 -->
+                {{ topic.replies() | count }} 回复
+            </span>
+        </div>
+        {% for r in topic.replies() %}
+        <div class='cell reply_area reply_item panel'>
+            <div class='author_content'>
+                <a href="/user/leiwei1991" class="user_avatar">
+                    <img src="https://avatars2.githubusercontent.com/u/10721874?v=3&amp;s=120"
+                         title="{{ r.user().username }}"/>
+                </a>
+                <div class='user_info'>
+                    <a class='dark reply_author'>
+                        {{ r.user().username }}
+                    </a>
+                    <a class="reply_time">
+                        {{ loop.index }}楼 • 2 天前
+                    </a>
+                </div>
+                <div class='user_action'>
+                    <span>
+                        <i class="fa up_btn
+                          fa-thumbs-o-up
+                          invisible" title="喜欢"></i>
+                        <span class="up-count">
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class='reply_content from-leiwei1991'>
+                <div class="markdown-text">
+                    {{ r.content }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">添加回复</span>
+            </div>
+            <form method="post" action="{{ url_for('reply.add') }}" >
+                <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                <textarea class='editor' name='content' rows='20'
+                                              placeholder='文章支持 Markdown 语法, 请注意标记代码'></textarea>
+                <input type="submit" class="span-primary submit_btn" data-loading-text="添加中.." value="添加评论">
+            </form>
+        </div>
+    </div>
+{% endblock %}
